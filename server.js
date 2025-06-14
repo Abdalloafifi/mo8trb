@@ -9,7 +9,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import connectDB from "./config/db.js";
-const securityMiddleware = require('./middlewares/securityMiddleware');
+import securityMiddleware from './middleware/securityMiddleware.js';
 
 
 // ------------------ [ 2. إعداد المتغيرات من .env ] ------------------
@@ -21,7 +21,7 @@ const __dirname = path.dirname(__filename);
 
 // ------------------ [ 4. تهيئة التطبيق ] ------------------
 const app = express();
-securityMiddleware(app)
+securityMiddleware(app);
 
 
 // ------------------ [ 5. الاتصال بقاعدة البيانات ] ------------------

@@ -1,24 +1,23 @@
 // npm install helmet express-mongo-sanitize express-rate-limit hpp xss-clean compression express-useragent morgan csurf cookie-parser
 
-const express = require('express');
-const helmet = require('helmet');
-const mongoSanitize = require('express-mongo-sanitize');
-const rateLimit = require('express-rate-limit');
-const hpp = require('hpp');
-const xssClean = require('xss-clean');
-const compression = require('compression');
-const useragent = require('express-useragent');
-const morgan = require('morgan');
-const csrf = require('csurf');
-const cookieParser = require('cookie-parser');
+import express from 'express';
+import helmet  from'helmet';
+import mongoSanitize  from'express-mongo-sanitize';
+import rateLimit  from'express-rate-limit';
+import hpp  from'hpp';
+import xssClean  from'xss-clean';
+import compression  from'compression';
+import useragent  from'express-useragent';
+import morgan from'morgan';
+import csrf  from'csurf';
+import cookieParser from'cookie-parser';
 
-module.exports = (app) => {
+const securityMiddleware = (app) => {
   app.disable('x-powered-by');
 
   // Logging
-    app.use(morgan('combined'));
-    app.use(morgan('dev'));
-    
+  app.use(morgan('combined'));
+  app.use(morgan('dev'));
 
   // Parsers
   app.use(express.json({ limit: '10kb' }));
@@ -145,3 +144,5 @@ module.exports = (app) => {
     res.status(500).json({ message: 'حدث خطأ بالسيرفر' });
   });
 };
+
+export default securityMiddleware;
