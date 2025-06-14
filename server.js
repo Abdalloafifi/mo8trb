@@ -9,6 +9,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import connectDB from "./config/db.js";
+const securityMiddleware = require('./middlewares/securityMiddleware');
+
 
 // ------------------ [ 2. إعداد المتغيرات من .env ] ------------------
 dotenv.config();
@@ -19,6 +21,8 @@ const __dirname = path.dirname(__filename);
 
 // ------------------ [ 4. تهيئة التطبيق ] ------------------
 const app = express();
+securityMiddleware(app)
+
 
 // ------------------ [ 5. الاتصال بقاعدة البيانات ] ------------------
 connectDB();
